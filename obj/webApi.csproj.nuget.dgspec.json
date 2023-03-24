@@ -1,0 +1,287 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/emre/Documents/Projelerim/QrliMenu/webApi/webApi.csproj": {}
+  },
+  "projects": {
+    "/Users/emre/Documents/Projelerim/QrliMenu/Business/Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/emre/Documents/Projelerim/QrliMenu/Business/Business.csproj",
+        "projectName": "Business",
+        "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/Business/Business.csproj",
+        "packagesPath": "/Users/emre/.nuget/packages/",
+        "outputPath": "/Users/emre/Documents/Projelerim/QrliMenu/Business/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/emre/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj": {
+                "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj"
+              },
+              "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj": {
+                "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/3.1.423/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj",
+        "packagesPath": "/Users/emre/.nuget/packages/",
+        "outputPath": "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/emre/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj": {
+                "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/3.1.423/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj",
+        "projectName": "Entity",
+        "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj",
+        "packagesPath": "/Users/emre/.nuget/packages/",
+        "outputPath": "/Users/emre/Documents/Projelerim/QrliMenu/Entity/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/emre/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/3.1.423/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/emre/Documents/Projelerim/QrliMenu/webApi/webApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/emre/Documents/Projelerim/QrliMenu/webApi/webApi.csproj",
+        "projectName": "webApi",
+        "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/webApi/webApi.csproj",
+        "packagesPath": "/Users/emre/.nuget/packages/",
+        "outputPath": "/Users/emre/Documents/Projelerim/QrliMenu/webApi/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/emre/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/Users/emre/Documents/Projelerim/QrliMenu/Business/Business.csproj": {
+                "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/Business/Business.csproj"
+              },
+              "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj": {
+                "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/DataAccess/DataAccess.csproj"
+              },
+              "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj": {
+                "projectPath": "/Users/emre/Documents/Projelerim/QrliMenu/Entity/Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.30, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.30, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/3.1.423/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
