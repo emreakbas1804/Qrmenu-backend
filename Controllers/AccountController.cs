@@ -13,7 +13,8 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using webApi.EmailServices;
 using System.Net.Mail;
-
+using Business.Abstract;
+using Microsoft.AspNetCore.Authorization;
 
 namespace webApi.Controllers
 {
@@ -24,15 +25,17 @@ namespace webApi.Controllers
         private readonly ApplicationContext context;
         private readonly IConfiguration configuration;
         private readonly SignInManager<User> signInManager;
+        private readonly IUserDetailService userdetailService;
         private readonly UserManager<User> userManager;
         Response response = new Response();
 
-        public AccountController(ApplicationContext Context, SignInManager<User> SignInManager, UserManager<User> UserManager, IConfiguration Configuration)
+        public AccountController(ApplicationContext Context, SignInManager<User> SignInManager, UserManager<User> UserManager, IConfiguration Configuration, IUserDetailService UserDetailService)
         {
             context = Context;
             signInManager = SignInManager;
             userManager = UserManager;
             configuration = Configuration;
+            userdetailService = UserDetailService;
         }
 
         [HttpPost]
@@ -46,31 +49,37 @@ namespace webApi.Controllers
                 PhoneNumber = model.PhoneNumber,
                 Kvkk = model.Kvkk,
                 CompanyName = TurkishToEnglish(model.CompanyName),
-                CompanyAddress = model.CompanyAddress
+                CompanyAddress = model.CompanyAddress,
+                LicanceKey = model.LicanceKey
             };
 
-            var result = await userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+            if (userdetailService.CheckLicanceKey(model.LicanceKey))
             {
-                var tokenCode = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var url = Url.Action("ConfirmEmail", "Account", new
+                var result = await userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                    userId = user.Id,
-                    token = tokenCode
-                });
-                MailMessage MyMail = new MailMessage()
-                {
-                    Subject = "Hesap onayı",
-                    Body = $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:4200{url}'>tıklayınız.</a>"
-                };
-                EmailService.SendEmail(user.Email, MyMail);
-                return Ok();
-            }
+                    var tokenCode = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var url = Url.Action("ConfirmEmail", "Account", new
+                    {
+                        userId = user.Id,
+                        token = tokenCode
+                    });
+                    MailMessage MyMail = new MailMessage()
+                    {
+                        Subject = "Hesap onayı",
+                        Body = $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:4000{url}'>tıklayınız.</a>"
+                    };
+                    EmailService.SendEmail(user.Email, MyMail);
+                    return Ok();
+                }
 
-            if (result.Errors.First().Code == "DuplicateUserName")
-            {
-                response.Header = "EMAIL_USING";
+                if (result.Errors.First().Code == "DuplicateUserName")
+                {
+                    response.Header = "EMAIL_USING";
+                }
+                return BadRequest(response);
             }
+            response.Header = "INVALID_LICANCE";
             return BadRequest(response);
 
         }
@@ -204,15 +213,15 @@ namespace webApi.Controllers
                 return BadRequest(response);
             }
             var token = await userManager.GeneratePasswordResetTokenAsync(user);
-            
-            var url = $"/sifremi-sifirla?token={token}&userId={user.Id}";
+
+            var url = $"/#/sifremi-sifirla?token={token}&userId={user.Id}";
 
             MailMessage MyMail = new MailMessage()
             {
                 Subject = "Hesap parola sıfırlaması",
                 Body = $"Parolanızı sıfırlamak için linke <a href='http://localhost:4200{url}'>tıklayınız.</a>"
             };
-            EmailService.SendEmail(email, MyMail);            
+            EmailService.SendEmail(email, MyMail);
             return Ok();
         }
 
@@ -223,23 +232,25 @@ namespace webApi.Controllers
         {
             // buraya dönüş yap
             var user = await userManager.FindByIdAsync(model.UserId);
-            if(user == null){
+            if (user == null)
+            {
                 response.Header = "USER_NOT_FOUND";
                 return BadRequest(response);
             }
-          
-            
+
+
             var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
-            
+
             if (result.Succeeded)
             {
                 return Ok();
             }
-            if(result.Errors.First().Code == "InvalidToken"){
-                response.Header = "INVALID_TOKEN";                
+            if (result.Errors.First().Code == "InvalidToken")
+            {
+                response.Header = "INVALID_TOKEN";
             }
             return BadRequest(response);
-            
+
         }
 
         public string TurkishToEnglish(string companyName)
@@ -254,12 +265,7 @@ namespace webApi.Controllers
             return companyName.ToLower();
         }
 
-
-
-
-
-
-
+        
 
 
     }

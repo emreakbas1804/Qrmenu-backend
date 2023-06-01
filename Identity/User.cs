@@ -8,6 +8,9 @@ namespace webApi.Identity
         public string CompanyName { get; set; }  
         public string CompanyAddress { get; set; }
         public bool Kvkk { get; set; }
+        public string LicanceKey { get; set; }
+        
+        
     }        
     
 }

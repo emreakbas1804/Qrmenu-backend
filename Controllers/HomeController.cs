@@ -24,7 +24,7 @@ namespace webApi.Controllers
         private readonly UserManager<User> userManager;
         private IProductService productService;
         private ICategoryService categoryService;
-        Response errorList = new Response();
+        Response response = new Response();
 
 
         public HomeController(SignInManager<User> SignInManager, UserManager<User> UserManager, IProductService ProductService, ICategoryService CategoryService, ApplicationContext Context)
@@ -71,18 +71,17 @@ namespace webApi.Controllers
             {
                 var userId = user.Id;
                 var categories = await categoryService.GetCompanyAllCategoriesAsync(userId);
-                
-                return Ok(categories);                
+
+                return Ok(categories);
             }
-
-
-            return BadRequest();
+            response.Header = "COMPANY_NOT_FOUND";
+            return BadRequest(response);
         }
 
 
         [HttpGet]
         [Route("company-category-products")]
-        public async Task<IActionResult> CompanyCategoryProductsAsync(string companyName, string companyCategory)
+        public async Task<IActionResult> CompanyCategoryProductsAsync(string companyName, int companyCategoryId)
         {
             var user = context.Users.Where(i => i.CompanyName == companyName).FirstOrDefault();
             if (user != null)
@@ -91,20 +90,18 @@ namespace webApi.Controllers
                 var categories = await categoryService.GetCompanyAllCategoriesAsync(userId);
                 foreach (var item in categories)
                 {
-                    if (item.CategoryName == companyCategory)
+                    if (item.CategoryId == companyCategoryId)
                     {
                         var categoryId = item.CategoryId;
                         var products = await productService.GetCompanyCategoryProductsAsync(categoryId);
                         return Ok(products);
                     }
                 }
-
-
-                return BadRequest();
+                response.Header = "PRODUCTS_NOT";
+                return BadRequest(response);
             }
-
-
-            return BadRequest();
+            response.Header = "COMPANY_NOT_FOUND";
+            return BadRequest(response);
         }
 
         [HttpGet]
@@ -125,33 +122,15 @@ namespace webApi.Controllers
                     }
                 }
 
-
-                return BadRequest();
+                response.Header = "PRODUCT_NOT_FOUND";
+                return BadRequest(response);
             }
-
-
-            return BadRequest();
+            response.Header = "COMPANY_NOT_FOUND";
+            return BadRequest(response);
         }
-
-        [Authorize]     
-        [HttpPost]
-        [Route("add-image")]           
-        public async Task<IActionResult> addImageAsync([FromForm] IFormFile image, [FromForm] Category model)
-        {
-            
-            if (image != null)
-            {
-                var extention = Path.GetExtension(image.FileName);
-                var LogoName = string.Format($"{Guid.NewGuid()}{extention}");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/userCategoryImages", LogoName);
-                using (var stream = new FileStream(path, FileMode.CreateNew))
-                {
-                    await image.CopyToAsync(stream);
-                }                
-            }
-            return Ok();
-        }
-
         
+        
+
+
     }
 }

@@ -56,6 +56,7 @@ namespace webApi
             services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IUserDetailService, UserDetailManager>();
 
             var key = Encoding.ASCII.GetBytes(Configuration["Secret"]);
             services.AddAuthentication(x =>
